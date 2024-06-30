@@ -8,6 +8,10 @@ public class Arqueiro extends Personagem{
         this.mira = mira;
     }
 
+    public int getMira() {
+        return mira;
+    }
+
     @Override
     public void atacar(Personagem inimigo){
         double dano = this.Ataque + this.mira -inimigo.getDefesa();
@@ -17,5 +21,18 @@ public class Arqueiro extends Personagem{
         }else {
             System.out.println("Nenhum dano causado!!!");
         }
+    }
+
+    @Override
+    public void imprimir(){
+        System.out.println(
+                "Nome: " + this.getNome() + "\n" +
+                        "Vida:" + this.getHpAtual() + "\n" +
+                        "Defesa: " + this.getDefesa() + "\n" +
+                        "Ataque: " + this.getAtaque() + "\n" +
+                        "Destreza: " + this.getDestreza() + "\n" +
+                        "Força: " + this.getForca() + "\n" +
+                        "Mira: " + this.getMira()
+        );
     }
 }

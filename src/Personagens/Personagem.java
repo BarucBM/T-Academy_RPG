@@ -120,6 +120,7 @@ public class Personagem {
 
     public void defender(){
         this.Defesa = (Defesa * 1.5);
+        this.addCondicao("Defendendo", 1);
         System.out.println(this.nome + " está defendendo!");
     }
 
@@ -179,7 +180,23 @@ public class Personagem {
             this.setHpAtual(this.getHpAtual() - 10);
             System.out.println(this.getNome() + " sofreu 10 de dano de envenenamento!");
         }
+        if(condicoes.containsKey("Defendendo") && condicoes.get("Defendendo")>0){
+            this.setDefesa(this.getDefesa() / 1.5);
+        }
+        condicoes.replaceAll((estado, duracao) -> duracao > 0 ? duracao - 1 : 0);
+
         return  aux;
+    }
+
+    public void imprimir(){
+        System.out.println(
+                "Nome: " + this.getNome() + "\n" +
+                "Vida:" + this.getHpAtual() + "\n" +
+                "Defesa: " + this.getDefesa() + "\n" +
+                "Ataque: " + this.getAtaque() + "\n" +
+                "Destreza: " + this.getDestreza() + "\n" +
+                "Força: " + this.getForca()
+        );
     }
 
 }

@@ -1,6 +1,9 @@
 package Jogo;
 
 import Habilidades.Habilidade;
+import Personagens.Barbaro;
+import Personagens.Inimigo;
+import Personagens.Mago;
 import Personagens.Personagem;
 import Loot.Item;
 
@@ -10,10 +13,10 @@ public class Batalha {
     protected ArrayList<Personagem> Aliados;
     protected ArrayList<Personagem> Inimigos;
     protected ArrayList<Personagem> vetor;
-    protected Scanner input;
     protected ArrayList<Personagem> inimigosVivos;
     protected ArrayList<Personagem> aliadosVivos;
     protected ArrayList<Personagem> combatentesVivos;
+    Scanner input;
 
     public Batalha() {
         this.Aliados = new ArrayList<>();
@@ -22,12 +25,78 @@ public class Batalha {
         this.inimigosVivos = new ArrayList<>();
         this.aliadosVivos = new ArrayList<>();
         this.combatentesVivos = new ArrayList<>();
-        this.input = new Scanner(System.in);
+        this.input = new Scanner(System.in);;
+    }
 
+    public void criarAliado(int aux){
+
+        System.out.println("Nome do personagem:");
+        String nome1 = input.nextLine();
+        System.out.println("Vida máxima:");
+        int HpMAx1 = input.nextInt();
+        System.out.println("Defesa:");
+        int Defesa1 = input.nextInt();
+        System.out.println("Ataque:");
+        int Ataque1 = input.nextInt();
+        System.out.println("Destreza:");
+        int Destreza1 = input.nextInt();
+        System.out.println("Força:");
+        int Forca1 = input.nextInt();
+
+        switch (aux){
+            case 1:
+                this.addAliado(new Barbaro(nome1, HpMAx1, Defesa1, Ataque1, Destreza1, Forca1));
+
+                break;
+
+            case 2:
+                System.out.println("Pontos de magia:");
+                int pontosMa = input.nextInt();
+                this.addAliado(new Mago(nome1, HpMAx1, Defesa1, Ataque1, Destreza1, Forca1, pontosMa));
+
+                break;
+
+            case 3:
+                System.out.println("Mira:");
+                int mira = input.nextInt();
+                this.addAliado(new Mago(nome1, HpMAx1, Defesa1, Ataque1, Destreza1, Forca1, mira));
+
+                break;
+        }
+    }
+    public void criarInimigo(){
+
+        System.out.println("Nome do personagem:");
+        String nome1 = input.nextLine();
+        String nome2 = input.nextLine();
+        System.out.println("Vida máxima:");
+        int HpMAx1 = input.nextInt();
+        System.out.println("Defesa:");
+        int Defesa1 = input.nextInt();
+        System.out.println("Ataque:");
+        int Ataque1 = input.nextInt();
+        System.out.println("Destreza:");
+        int Destreza1 = input.nextInt();
+        System.out.println("Força:");
+        int Forca1 = input.nextInt();
+        System.out.println("Tipo:");
+        String Tipo1 = input.nextLine();
+        String Tipo2 = input.nextLine();
+
+        this.addInimigo(new Inimigo(nome2, HpMAx1, Defesa1, Ataque1, Destreza1, Forca1, Tipo2));
+
+    }
+
+    public ArrayList<Personagem> getAliados() {
+        return Aliados;
+    }
+    public ArrayList<Personagem> getInimigos() {
+        return Inimigos;
     }
 
     public void addAliado(Personagem aux){
         Aliados.add(aux);
+        aux.imprimir();
     }
     public void removeAliado(Personagem aux){
         Aliados.remove(aux);
@@ -64,6 +133,7 @@ public class Batalha {
 
     //Adiciona os Inimigos e Aliados que estão vivos em uma Array separada.
     public void InimigosVivos(){
+        inimigosVivos.clear();
         for (Personagem inimigo: Inimigos){
             if(inimigo.getHpAtual()>0){
                 inimigosVivos.add(inimigo);
@@ -71,6 +141,7 @@ public class Batalha {
         }
     }
     public void AliadosVivos(){
+        aliadosVivos.clear();
         for (Personagem aliado: Aliados){
             if(aliado.getHpAtual()>0){
                 aliadosVivos.add(aliado);
@@ -90,9 +161,20 @@ public class Batalha {
         return aux;
     }
 
-    public void rodada(Personagem personagem) {
+    public boolean rodada(Personagem personagem) {
+        ;
+        boolean test = false;
         AliadosVivos();
         InimigosVivos();
+        if(aliadosVivos.isEmpty()){
+            test = true;
+            System.out.println("Todos os aliados morreram! Você perdeu!");
+            return test;
+        } else if (inimigosVivos.isEmpty()) {
+            test = true;
+            System.out.println("Todos os inimigos morreram! Você venceu!");
+            return test;
+        }
 
         combatentesVivos.addAll(aliadosVivos);
         combatentesVivos.addAll(inimigosVivos);
@@ -119,6 +201,7 @@ public class Batalha {
                             } else {
                                 personagem.atacar(inimigosVivos.get(0));
                             }
+
                             break;
                         } catch (Exception e) {
                             System.out.println("Não existem inimigos vivos!");
@@ -141,7 +224,7 @@ public class Batalha {
                             System.out.println("Escolha um alvo:");
                             int aux1 = 0;
                             for (Personagem alvo : combatentesVivos) {
-                                aux++;
+                                aux1++;
                                 System.out.println(aux + " " + alvo.getNome());
                             }
                             personagem.usarHabilidade(personagem.getHabilidades().get(habilidade - 1), combatentesVivos.get(input.nextInt() - 1));
@@ -181,6 +264,7 @@ public class Batalha {
             }
 
         }
+        return test;
 
     }
 }

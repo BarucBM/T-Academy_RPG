@@ -9,6 +9,11 @@ public class Mago extends Personagem{
         super(nome, HPMax, defesa, ataque, destreza, forca);
         this.pontosMagia = pontosMagia;
     }
+
+    public int getPontosMagia() {
+        return pontosMagia;
+    }
+
     @Override
     public void atacar(Personagem inimigo){
         Scanner input = new Scanner(System.in);
@@ -21,5 +26,17 @@ public class Mago extends Personagem{
         }else {
             System.out.println("Nenhum dano causado!!!");
         }
+    }
+    @Override
+    public void imprimir(){
+        System.out.println(
+                "Nome: " + this.getNome() + "\n" +
+                "Vida:" + this.getHpAtual() + "\n" +
+                "Defesa: " + this.getDefesa() + "\n" +
+                "Ataque: " + this.getAtaque() + "\n" +
+                "Destreza: " + this.getDestreza() + "\n" +
+                "Força: " + this.getForca() + "\n" +
+                "Pontos de magia: " + this.getPontosMagia()
+        );
     }
 }

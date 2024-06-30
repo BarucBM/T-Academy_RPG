@@ -7,7 +7,7 @@ public class Barbaro extends Personagem {
 
     @Override
     public void atacar(Personagem inimigo){
-        double dano = this.Ataque + (this.forca/2) -inimigo.getDefesa();
+        double dano = this.Ataque + this.forca -inimigo.getDefesa();
         if(dano>0){
             inimigo.setHpAtual(inimigo.getHpAtual() - dano);
             System.out.println(this.getNome() + " causou " + dano + " à " + inimigo.getNome());
