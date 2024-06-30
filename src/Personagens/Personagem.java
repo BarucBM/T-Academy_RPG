@@ -105,7 +105,6 @@ public class Personagem {
 
     public boolean acao(){return false;}
 
-
     public void atacar(Personagem inimigo){
 
         double dano = this.Ataque-inimigo.getDefesa();
@@ -190,7 +189,7 @@ public class Personagem {
     }
 
     public void imprimir(){
-        System.out.println(
+        System.out.println("\n" +
                 "Nome: " + this.getNome() + "\n" +
                 "Vida:" + this.getHpAtual() + "\n" +
                 "Defesa: " + this.getDefesa() + "\n" +

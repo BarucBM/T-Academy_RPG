@@ -30,10 +30,4 @@ public class Habilidade {
         return danoBase;
     }
 
-    public void Cast(Personagem alvo){
-        switch (this.tipo){
-            case "Fogo":
-
-        }
-    }
 }

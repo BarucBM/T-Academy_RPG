@@ -28,6 +28,7 @@ public class Batalha {
         this.input = new Scanner(System.in);;
     }
 
+
     public void criarAliado(int aux){
 
         System.out.println("Nome do personagem:");
@@ -86,6 +87,25 @@ public class Batalha {
         this.addInimigo(new Inimigo(nome2, HpMAx1, Defesa1, Ataque1, Destreza1, Forca1, Tipo2));
 
     }
+    public void criarHabilidade(Personagem personagem){
+        System.out.println("Nome:");
+        String nome = input.nextLine();
+        System.out.println("Tipo:");
+        String tipo = input.nextLine();
+        int cura = 0, dano = 0;
+        if(tipo.equalsIgnoreCase("Cura")){
+            System.out.println("Cura:");
+            cura = input.nextInt();
+        }else{
+            System.out.println("Dano:");
+            dano = input.nextInt();
+        }
+
+        personagem.addHabilidades(new Habilidade(nome, tipo, dano, cura));
+
+
+
+    }
 
     public ArrayList<Personagem> getAliados() {
         return Aliados;
@@ -103,6 +123,7 @@ public class Batalha {
     }
     public void addInimigo(Personagem aux){
         Inimigos.add(aux);
+        aux.imprimir();
     }
     public void removeInimigo(Personagem aux){
         Inimigos.remove(aux);
@@ -162,7 +183,7 @@ public class Batalha {
     }
 
     public boolean rodada(Personagem personagem) {
-        ;
+
         boolean test = false;
         AliadosVivos();
         InimigosVivos();
@@ -175,7 +196,7 @@ public class Batalha {
             System.out.println("Todos os inimigos morreram! Você venceu!");
             return test;
         }
-
+        combatentesVivos.clear();
         combatentesVivos.addAll(aliadosVivos);
         combatentesVivos.addAll(inimigosVivos);
 
@@ -222,10 +243,10 @@ public class Batalha {
                             int habilidade = input.nextInt();
 
                             System.out.println("Escolha um alvo:");
-                            int aux1 = 0;
+                            int counter = 0;
                             for (Personagem alvo : combatentesVivos) {
-                                aux1++;
-                                System.out.println(aux + " " + alvo.getNome());
+                                counter++;
+                                System.out.println(counter + " " + alvo.getNome());
                             }
                             personagem.usarHabilidade(personagem.getHabilidades().get(habilidade - 1), combatentesVivos.get(input.nextInt() - 1));
                         } catch (Exception e) {
@@ -249,6 +270,7 @@ public class Batalha {
                         boolean aux = personagem.testeDestreza(11);
                         if (aux) {
                             System.out.println(personagem.getNome() + " fugiu!");
+
                         } else {
                             System.out.println(personagem.getNome() + " não conseguiu fugir!");
                         }

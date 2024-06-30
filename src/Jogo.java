@@ -34,6 +34,25 @@ public class Jogo {
 
         }
 
+        boolean aux4 = true;
+        while(aux4){
+            System.out.println(
+                    "Criar habilidades: \n" +
+                            "1 - Nova habilidade.\n" +
+                            "2 - Próxima etapa.\n");
+            int scan = scanner.nextInt();
+            if(scan == 1){
+                int count = 0;
+                System.out.println("Escolha o aliado:");
+                for (Personagem alvo : batalha.getAliados()) {
+                    count++;
+                    System.out.println(count + " " + alvo.getNome());
+                }
+                batalha.criarHabilidade(batalha.getAliados().get(scanner.nextInt()-1));
+            } else if (scan == 2) {
+                aux4 = false;
+            }
+        }
         //MENU 2 - Criar Inimigos
         boolean aux2 = true;
         while(aux2) {

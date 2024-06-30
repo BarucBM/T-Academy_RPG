@@ -3,15 +3,17 @@ package Personagens;
 import java.util.Scanner;
 
 public class Mago extends Personagem{
-    protected int pontosMagia;
+    protected int pontosMagiaMax;
+    protected int pontosMagiaAtual;
 
-    public Mago(String nome, double HPMax, double defesa, double ataque, double destreza, double forca, int pontosMagia) {
+    public Mago(String nome, double HPMax, double defesa, double ataque, double destreza, double forca, int pontosMagiaMax) {
         super(nome, HPMax, defesa, ataque, destreza, forca);
-        this.pontosMagia = pontosMagia;
+        this.pontosMagiaMax = pontosMagiaMax;
+        this.pontosMagiaAtual = pontosMagiaMax;
     }
 
-    public int getPontosMagia() {
-        return pontosMagia;
+    public int getPontosMagiaMax() {
+        return pontosMagiaMax;
     }
 
     @Override
@@ -36,7 +38,7 @@ public class Mago extends Personagem{
                 "Ataque: " + this.getAtaque() + "\n" +
                 "Destreza: " + this.getDestreza() + "\n" +
                 "Força: " + this.getForca() + "\n" +
-                "Pontos de magia: " + this.getPontosMagia()
+                "Pontos de magia: " + this.getPontosMagiaMax()
         );
     }
 }
