@@ -257,7 +257,7 @@ public class Batalha {
             }else{
                if(personagem.acao()){
                    Random random = new Random();
-                   personagem.atacar(aliadosVivos.get(random.nextInt(aliadosVivos.size()-1)));
+                   personagem.atacar(aliadosVivos.get(random.nextInt(aliadosVivos.size())));
                }else{
                    personagem.defender();
                }

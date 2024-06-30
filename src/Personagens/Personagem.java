@@ -45,7 +45,7 @@ public class Personagem {
     }
     public double getHpAtual(){return this.hpAtual;}
     public void setHpAtual(double HP) {
-        this.hpMAx = HP;
+        this.hpAtual = HP;
     }
 
     public double getDefesa() {
@@ -111,6 +111,7 @@ public class Personagem {
         double dano = this.Ataque-inimigo.getDefesa();
         if(dano>0){
             inimigo.setHpAtual(inimigo.getHpAtual() - dano);
+            System.out.println(inimigo.getHpAtual());
             System.out.println(this.getNome() + " causou " + dano + " à " + inimigo.getNome());
         }else {
             System.out.println("Nenhum dano causado!!!");
