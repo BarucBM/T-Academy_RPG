@@ -16,8 +16,9 @@ public class Batalha {
     protected ArrayList<Personagem> inimigosVivos;
     protected ArrayList<Personagem> aliadosVivos;
     protected ArrayList<Personagem> combatentesVivos;
-    Scanner input;
+    protected Scanner input;
 
+    //Construtor ________________________________________________________________________
     public Batalha() {
         this.Aliados = new ArrayList<>();
         this.Inimigos = new ArrayList<>();
@@ -28,11 +29,14 @@ public class Batalha {
         this.input = new Scanner(System.in);;
     }
 
-
+    //Criação dos Aliados, inimigos e habilidades________________________________________________________________________
     public void criarAliado(int aux){
 
         System.out.println("Nome do personagem:");
-        String nome1 = input.nextLine();
+        String nome = input.nextLine();
+        if (Objects.equals(nome, "")){
+            nome = input.nextLine();
+        }
         System.out.println("Vida máxima:");
         int HpMAx1 = input.nextInt();
         System.out.println("Defesa:");
@@ -46,21 +50,21 @@ public class Batalha {
 
         switch (aux){
             case 1:
-                this.addAliado(new Barbaro(nome1, HpMAx1, Defesa1, Ataque1, Destreza1, Forca1));
+                this.addAliado(new Barbaro(nome, HpMAx1, Defesa1, Ataque1, Destreza1, Forca1));
 
                 break;
 
             case 2:
                 System.out.println("Pontos de magia:");
                 int pontosMa = input.nextInt();
-                this.addAliado(new Mago(nome1, HpMAx1, Defesa1, Ataque1, Destreza1, Forca1, pontosMa));
+                this.addAliado(new Mago(nome, HpMAx1, Defesa1, Ataque1, Destreza1, Forca1, pontosMa));
 
                 break;
 
             case 3:
                 System.out.println("Mira:");
                 int mira = input.nextInt();
-                this.addAliado(new Mago(nome1, HpMAx1, Defesa1, Ataque1, Destreza1, Forca1, mira));
+                this.addAliado(new Mago(nome, HpMAx1, Defesa1, Ataque1, Destreza1, Forca1, mira));
 
                 break;
         }
@@ -68,8 +72,10 @@ public class Batalha {
     public void criarInimigo(){
 
         System.out.println("Nome do personagem:");
-        String nome1 = input.nextLine();
-        String nome2 = input.nextLine();
+        String nome = input.nextLine();
+        if (Objects.equals(nome, "")){
+            nome = input.nextLine();
+        }
         System.out.println("Vida máxima:");
         int HpMAx1 = input.nextInt();
         System.out.println("Defesa:");
@@ -84,12 +90,15 @@ public class Batalha {
         String Tipo1 = input.nextLine();
         String Tipo2 = input.nextLine();
 
-        this.addInimigo(new Inimigo(nome2, HpMAx1, Defesa1, Ataque1, Destreza1, Forca1, Tipo2));
+        this.addInimigo(new Inimigo(nome, HpMAx1, Defesa1, Ataque1, Destreza1, Forca1, Tipo2));
 
     }
     public void criarHabilidade(Personagem personagem){
         System.out.println("Nome:");
         String nome = input.nextLine();
+        if (Objects.equals(nome, "")){
+            nome = input.nextLine();
+        }
         System.out.println("Tipo:");
         String tipo = input.nextLine();
         int cura = 0, dano = 0;
@@ -100,20 +109,16 @@ public class Batalha {
             System.out.println("Dano:");
             dano = input.nextInt();
         }
-
         personagem.addHabilidades(new Habilidade(nome, tipo, dano, cura));
-
-
-
     }
 
+    //Manipulação de dados de aliados e Inimigos________________________________________________________________________
     public ArrayList<Personagem> getAliados() {
         return Aliados;
     }
     public ArrayList<Personagem> getInimigos() {
         return Inimigos;
     }
-
     public void addAliado(Personagem aux){
         Aliados.add(aux);
         aux.imprimir();
@@ -129,7 +134,7 @@ public class Batalha {
         Inimigos.remove(aux);
     }
 
-    //Ordena os combatentes nos arrays por ordem de Destreza (BubbleSort).
+    //Ordena os combatentes nos arrays por ordem de Destreza (BubbleSort).________________________________________________________________________
     public ArrayList<Personagem> OrdenaCombatentes(ArrayList<Personagem> aliados, ArrayList<Personagem> inimigos){
         vetor.addAll(aliados);
         vetor.addAll(inimigos);
@@ -152,7 +157,7 @@ public class Batalha {
 
     }
 
-    //Adiciona os Inimigos e Aliados que estão vivos em uma Array separada.
+    //Adiciona os Inimigos e Aliados que estão vivos em uma Array distinta.________________________________________________________________________
     public void InimigosVivos(){
         inimigosVivos.clear();
         for (Personagem inimigo: Inimigos){
@@ -170,8 +175,8 @@ public class Batalha {
         }
     }
 
-
-    public boolean VerificaLista(ArrayList<Personagem> lista, Personagem personagem){
+    //Verifica existência de um Objeto na array________________________________________________________________________________________________________________________________________________
+    public boolean VerificaLista(ArrayList<Personagem> lista, Object personagem){
         boolean aux = false;
         for (Personagem personagem1 : lista){
             if(personagem1.equals(personagem)){
@@ -182,8 +187,9 @@ public class Batalha {
         return aux;
     }
 
+    //Método de cada rodada________________________________________________________________________________________________________________________________________________
     public boolean rodada(Personagem personagem) {
-
+        //Inicia variáveis e faz verificação de condições dos personagens
         boolean test = false;
         AliadosVivos();
         InimigosVivos();
@@ -200,6 +206,8 @@ public class Batalha {
         combatentesVivos.addAll(aliadosVivos);
         combatentesVivos.addAll(inimigosVivos);
 
+        //Inicia os menus de ações dos personagens
+        //Caso ele seja um aliado leva à um menu, caso seja um inimigo realiza uma ação aleatória
         if(!personagem.verificaCondicoes() && personagem.isAlive()){
             if (VerificaLista(aliadosVivos, personagem)) {
                 System.out.println("Turno do " + personagem.getNome() + ": \n   " +
@@ -208,6 +216,7 @@ public class Batalha {
                         "3 - Usar Habilidade \n   " +
                         "4 - Usar item \n   " +
                         "5 - Fugir \n   ");
+                //Switch para cada ação do Aliado
                 switch (input.nextInt()) {
                     case 1:
                         try {

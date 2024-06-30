@@ -29,6 +29,7 @@ public class Mago extends Personagem{
             System.out.println("Nenhum dano causado!!!");
         }
     }
+
     @Override
     public void imprimir(){
         System.out.println(

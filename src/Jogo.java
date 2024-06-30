@@ -13,7 +13,7 @@ public class Jogo {
         Batalha batalha = new Batalha();
         System.out.println("Nova batalha iniciada!");
 
-        //MENU 1 - Criar Aliados
+        //MENU 1 - Criar Aliados________________________________________________________________________
         boolean aux1 = true;
         while(aux1) {
 
@@ -34,6 +34,7 @@ public class Jogo {
 
         }
 
+        //MENU 2 - Criari Habilidades________________________________________________________________________
         boolean aux4 = true;
         while(aux4){
             System.out.println(
@@ -53,7 +54,8 @@ public class Jogo {
                 aux4 = false;
             }
         }
-        //MENU 2 - Criar Inimigos
+
+        //MENU 3 - Criar Inimigos________________________________________________________________________
         boolean aux2 = true;
         while(aux2) {
 
@@ -71,10 +73,9 @@ public class Jogo {
             }
         }
 
-        //Batalha
+        //Inicio da batalha ___________________________________________________________________________
         boolean aux3 = true;
         ArrayList<Personagem> combatentes = batalha.OrdenaCombatentes(batalha.getAliados(), batalha.getInimigos());
-
         while (aux3){
             for(Personagem personagem : combatentes){
                if(batalha.rodada(personagem)){
