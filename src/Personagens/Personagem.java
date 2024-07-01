@@ -19,6 +19,7 @@ public class Personagem {
     protected ArrayList<Habilidade> habilidades;
     protected ArrayList<Item> itens;
     protected Map<String, Integer> condicoes;
+    protected int nivel;
 
     //Construtor de personagem________________________________________________________________________________________________________________________________________________
     public Personagem(String nome, double HPMax, double defesa, double ataque, double destreza, double forca) {
@@ -43,6 +44,9 @@ public class Personagem {
     }
     public double getHpMAx() {
         return this.hpMAx;
+    }
+    public void setHpMAx(double hpMAx) {
+        this.hpMAx = hpMAx;
     }
     public double getHpAtual(){return this.hpAtual;}
     public void setHpAtual(double HP) {
@@ -87,6 +91,20 @@ public class Personagem {
     public void addCondicao(String condicao, Integer duracao) {
         this.condicoes.put(condicao, duracao);
     }
+    public int getNivel() {
+        return nivel;
+    }
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+        if(this.nivel>=20 && this.nivel<=39){
+            this.aumentaNivel(1);
+        } else if (this.nivel>=40 && this.nivel<=59) {
+            this.aumentaNivel(2);
+        } else if (this.nivel>=60) {
+            this.aumentaNivel(3);
+        }
+    }
+    public int getExp(){return 0;}
 
     //Teste de destreza padrão do personagem _______________________________________________________________________________________________________________________________________
     public boolean testeDestreza(int nivel){
@@ -184,6 +202,35 @@ public class Personagem {
         condicoes.replaceAll((estado, duracao) -> duracao > 0 ? duracao - 1 : 0);
 
         return  aux;
+    }
+
+    public void aumentaNivel(int nivel){
+        switch (nivel){
+            case 1:
+                this.setHpMAx(this.getHpMAx() + 5);
+                this.setAtaque(this.getAtaque() + 5);
+                this.setDefesa(this.getDefesa() + 5);
+                this.setDestreza(this.getDestreza() + 5);
+                this.setForca(this.getForca() + 5);
+                break;
+
+            case 2:
+                this.setHpMAx(this.getHpMAx() + 10);
+                this.setAtaque(this.getAtaque() + 10);
+                this.setDefesa(this.getDefesa() + 10);
+                this.setDestreza(this.getDestreza() + 10);
+                this.setForca(this.getForca() + 10);
+                break;
+
+            case 3:
+                this.setHpMAx(this.getHpMAx() + 15);
+                this.setAtaque(this.getAtaque() + 15);
+                this.setDefesa(this.getDefesa() + 15);
+                this.setDestreza(this.getDestreza() + 15);
+                this.setForca(this.getForca() + 15);
+                break;
+
+        }
     }
 
     //Print do personagem_________________________________________________________________________________________________________________________________________________________

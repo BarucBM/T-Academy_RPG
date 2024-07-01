@@ -187,6 +187,20 @@ public class Batalha {
         return aux;
     }
 
+    public void resetRodada(){
+        int exp = 0;
+        for(Personagem inimigo:Inimigos){
+            exp = exp + inimigo.getExp();
+        }
+
+        for (Personagem personagem:Aliados){
+            personagem.setNivel((personagem.getNivel() + exp));
+            personagem.setHpAtual(personagem.getHpMAx());
+        }
+
+        this.getInimigos().clear();
+    }
+
     //Método de cada rodada________________________________________________________________________________________________________________________________________________
     public boolean rodada(Personagem personagem) {
         //Inicia variáveis e faz verificação de condições dos personagens

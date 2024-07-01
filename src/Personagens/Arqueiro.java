@@ -11,6 +11,11 @@ public class Arqueiro extends Personagem{
     public int getMira() {
         return mira;
     }
+    public void setMira(int mira) {
+        this.mira = mira;
+    }
+
+
 
     @Override
     public void atacar(Personagem inimigo){
@@ -35,4 +40,39 @@ public class Arqueiro extends Personagem{
                         "Mira: " + this.getMira()
         );
     }
+
+    @Override
+    public void aumentaNivel(int nivel){
+        switch (nivel) {
+            case 1:
+                this.setHpMAx(this.getHpMAx() + 5);
+                this.setAtaque(this.getAtaque() + 5);
+                this.setDefesa(this.getDefesa() + 5);
+                this.setDestreza(this.getDestreza() + 5);
+                this.setForca(this.getForca() + 5);
+                this.setMira(this.getMira() + 5);
+                break;
+
+            case 2:
+                this.setHpMAx(this.getHpMAx() + 10);
+                this.setAtaque(this.getAtaque() + 10);
+                this.setDefesa(this.getDefesa() + 10);
+                this.setDestreza(this.getDestreza() + 10);
+                this.setForca(this.getForca() + 10);
+                this.setMira(this.getMira() + 10);
+                break;
+
+            case 3:
+                this.setHpMAx(this.getHpMAx() + 15);
+                this.setAtaque(this.getAtaque() + 15);
+                this.setDefesa(this.getDefesa() + 15);
+                this.setDestreza(this.getDestreza() + 15);
+                this.setForca(this.getForca() + 15);
+                this.setMira(this.getMira() + 15);
+                break;
+
+
+        }
+    }
 }
+

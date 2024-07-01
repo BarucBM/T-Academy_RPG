@@ -7,17 +7,19 @@ public class Recompensa {
 
     public Recompensa() {}
 
-    public int setDrop(String tipo){
+    public void setDrop(String tipo){
         Random random = new Random();
-        int aux = 0;
+
         switch (tipo){
             case "Monstro":
-                aux = random.nextInt(50-5)+5;
+                this.exp = random.nextInt(50-5)+5;
+                break;
 
             case "Boss":
-                aux = random.nextInt(100-50)+50;
+                this.exp = random.nextInt(100-50)+50;
+                break;
         }
-        return aux;
+
     }
     public Item getItem() {
         return item;

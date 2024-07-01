@@ -11,14 +11,20 @@ public class Inimigo extends Personagem{
     public Inimigo(String nome, double HPMax, double defesa, double ataque, double destreza, double forca, String tipo) {
         super(nome, HPMax, defesa, ataque, destreza, forca);
         this.tipo = tipo;
-        //int x = this.recompensa.setDrop(tipo);
+
     }
 
     public String getTipo() {
         return tipo;
     }
     public String getDrop() {return recompensa.getItem().getNome();}
-    public int getExp() {return recompensa.getExp();}
+
+    @Override
+    public int getExp() {
+        this.recompensa.setDrop(tipo);
+
+        return recompensa.getExp();
+    }
 
     @Override
     public boolean acao(){
